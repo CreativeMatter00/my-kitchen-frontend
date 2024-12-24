@@ -13,6 +13,7 @@ import FormSubmitButton from "@/components/shared/FormSubmitButton";
 import { schema } from "./Schema";
 import MultipleImageInput from "@/components/shared/MultipleImageInput";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import TextInput from "@/components/shared/TextInput";
 
 
 const AddProduct: React.FC<FormModalProps> = ({ modalClose }) => {
@@ -60,7 +61,7 @@ const AddProduct: React.FC<FormModalProps> = ({ modalClose }) => {
         formData.append("color", data.color);
         formData.append("installation", data.installation);
         if (data.images && data.images.length > 0) {
-            Array.from(data.images).forEach((file:any) => {
+            Array.from(data.images).forEach((file: any) => {
                 formData.append("images", file); // Use the key "images"
             });
         } else {
@@ -90,7 +91,7 @@ const AddProduct: React.FC<FormModalProps> = ({ modalClose }) => {
     // const images = watch('images');
     useEffect(() => {
         setValue('images', images)
-    }, [images])
+    }, [images, setValue])
     const formImages = watch('images');
     useEffect(() => {
         console.log('formImages', formImages)
@@ -152,6 +153,13 @@ const AddProduct: React.FC<FormModalProps> = ({ modalClose }) => {
                     register={register}
                     error={errors.description}
                     required
+                />
+                <TextInput name="description" labelName="Description"
+                    control={control}
+                    errors={errors}
+                    setValue={setValue}
+                    required={true}
+
                 />
                 <Input
                     label="Specification"
